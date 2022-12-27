@@ -82,15 +82,30 @@ class MyEnv(Environment):
         """
         reward = 0
         
-        if (action == 0 and self._last_ponctual_observation[1] == 1):
-            reward = self.prices[self._counter-1] - 0.5
-        if (action == 1 and self._last_ponctual_observation[1] == 0):
-            reward = -self.prices[self._counter-1] - 0.5
+        if action == 0:
+            if self._last_ponctual_observation[1] == 5:
+                reward = 1
+            else:
+                self._last_ponctual_observation[1] += 1
+        if action == 1:
+            if self._last_ponctual_observation[1] == 0:
+                reward = 0.2
+            else:
+                self._last_ponctual_observation[1] = 0
+            
+        
 
-        self._last_ponctual_observation[0] = self.prices[self._counter]
-        self._last_ponctual_observation[1] = action
+        
+        
+        # if (action == 0 and self._last_ponctual_observation[1] == 1):
+        #     reward = self.prices[self._counter-1] - 0.5
+        # if (action == 1 and self._last_ponctual_observation[1] == 0):
+        #     reward = -self.prices[self._counter-1] - 0.5
 
-        self._counter += 1
+        # self._last_ponctual_observation[0] = self.prices[self._counter]
+        # self._last_ponctual_observation[1] = action
+
+        # self._counter += 1
         
         return reward
 
@@ -134,10 +149,10 @@ class MyEnv(Environment):
         print ("A plot of the policy obtained has been saved under the name plot.png")
     
     def inputDimensions(self):
-        return [(6,), (1,)]     # We consider an observation made up of an history of 
+        #return [(6,), (1,)]     # We consider an observation made up of an history of 
                                 # - the last six for the first scalar element obtained
                                 # - the last one for the second scalar element
-
+        return [(1,)]
 
     def nActions(self):
         return 2                # The environment allows two different actions to be taken at each time step

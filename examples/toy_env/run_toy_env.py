@@ -6,6 +6,7 @@ import sys
 import logging
 import numpy as np
 
+
 from deer.default_parser import process_args
 from deer.agent import NeuralAgent
 from deer.learning_algos.q_net_keras import MyQNetwork
@@ -18,9 +19,9 @@ class Defaults:
     # ----------------------
     # Experiment Parameters
     # ----------------------
-    STEPS_PER_EPOCH = 1000
-    EPOCHS = 50
-    STEPS_PER_TEST = 500
+    STEPS_PER_EPOCH = 10
+    EPOCHS = 1
+    STEPS_PER_TEST = 50
     PERIOD_BTW_SUMMARY_PERFS = 1
 
     # ----------------------
