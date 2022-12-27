@@ -3,21 +3,23 @@ import copy
 import random
 import matplotlib.pyplot as plt
 
-a1_col = np.zeros(5)
-a2_col = np.zeros(5)
+length = 5
+
+a1_col = np.zeros(length)
+a2_col = np.zeros(length)
 
 cols=[a1_col,a2_col]
 
-Ta1 = np.diag(np.ones(4),k=1)
+Ta1 = np.diag(np.ones(length-1),k=1)
 Ta1[-1][-1]=1
-Ta2 = np.zeros((5,4))
-Ta2 = np.hstack((np.ones(5).reshape((5,1)),Ta2))
+Ta2 = np.zeros((length,length-1))
+Ta2 = np.hstack((np.ones(length).reshape((length,1)),Ta2))
 
 Tas = [Ta1,Ta2]
 
-ra1 = np.zeros(5)
+ra1 = np.zeros(length)
 ra1[-1] =1
-ra2     = np.zeros(5)
+ra2     = np.zeros(length)
 ra2[0]  = 0.2
 
 rs = [ra1,ra2]
@@ -32,8 +34,8 @@ def eps_greedy(cols,x,eps=0.1):
 
 for i in range(100):
     old_cols = copy.deepcopy(cols)
-    for x in range(5):
-        svector = np.zeros(5)
+    for x in range(length):
+        svector = np.zeros(length)
         svector[x] = 1
         a = eps_greedy(cols,x)
         r = np.dot(rs[a],svector)
