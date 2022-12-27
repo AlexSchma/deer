@@ -27,7 +27,7 @@ class MyEnv(Environment):
         rng : the numpy random number generator
         """
         # Defining the type of environment
-        self._last_ponctual_observation = [0, 0] # At each time step, the observation is made up of two elements, each scalar
+        self._last_ponctual_observation = [0] # At each time step, the observation is made up of two elements, each scalar
         
         self._random_state = rng
                 
@@ -63,10 +63,10 @@ class MyEnv(Environment):
             self.prices = self._price_signal_valid
             
         
-        self._last_ponctual_observation = [self.prices[0], 0]
+        self._last_ponctual_observation = [0]
 
         self._counter = 1
-        return [6*[0], 0]
+        return [0]
 
     def act(self, action):
         """ Performs one time-step within the environment and updates the current observation self._last_ponctual_observation
@@ -83,15 +83,15 @@ class MyEnv(Environment):
         reward = 0
         
         if action == 0:
-            if self._last_ponctual_observation[1] == 5:
+            if self._last_ponctual_observation[0] == 4:
                 reward = 1
             else:
-                self._last_ponctual_observation[1] += 1
+                self._last_ponctual_observation[0] += 1
         if action == 1:
-            if self._last_ponctual_observation[1] == 0:
+            if self._last_ponctual_observation[0] == 0:
                 reward = 0.2
             else:
-                self._last_ponctual_observation[1] = 0
+                self._last_ponctual_observation[0] = 0
             
         
 
@@ -110,6 +110,7 @@ class MyEnv(Environment):
         return reward
 
     def summarizePerformance(self, test_data_set, *args, **kwargs):
+        return
         """
         This function is called at every PERIOD_BTW_SUMMARY_PERFS.
         Parameters

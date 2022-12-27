@@ -36,8 +36,11 @@ agent.attach(bc.VerboseController())
 # residual and the average of the V values obtained during the last episode.
 agent.attach(bc.TrainerController())
 
+
 # We also want to interleave a "test epoch" between each training epoch. 
-agent.attach(bc.InterleavedTestEpochController(epoch_length=500))
+agent.attach(bc.InterleavedTestEpochController(epoch_length=10))
     
 # --- Run the experiment ---
-agent.run(n_epochs=100, epoch_length=1000)
+agent.run(n_epochs=20, epoch_length=40)
+for i in range(5):
+    print(qnetwork.qValues([i]))
